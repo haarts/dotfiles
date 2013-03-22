@@ -57,6 +57,9 @@ nmap <C-l> :bprev<CR>
 " Sane Yank
 nmap Y y$
 
+command W w
+command Q q
+
 filetype plugin indent on
 
 set autoindent
