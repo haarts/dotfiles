@@ -4,8 +4,7 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export GOPATH=~/prj/go
 
-bindkey -v
-bindkey "^R" history-incremental-search-backward
+bindkey -e
 
 setopt inc_append_history
 setopt share_history
