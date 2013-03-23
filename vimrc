@@ -2,8 +2,6 @@ set encoding=utf-8
 
 source ~/.vim/bundles.vim
 
-bindkey -e
-
 let mapleader = ","
 
 syntax enable
