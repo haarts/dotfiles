@@ -1,8 +1,7 @@
 # To install source this file from your .zshrc file
 
 # Change this to reflect your installation directory
-export __GIT_PROMPT_DIR=~/prj/dotfiles
-#export __GIT_PROMPT_DIR=~/.dotfiles
+export __GIT_PROMPT_DIR=~/.dotfiles
 # Initialize colors.
 autoload -U colors
 colors
