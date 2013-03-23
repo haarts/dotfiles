@@ -1,4 +1,4 @@
-# To install source this file from your .zshrc file
+# From https://github.com/olivierverdier/zsh-git-prompt.git 
 
 # Change this to reflect your installation directory
 export __GIT_PROMPT_DIR=~/.dotfiles
