@@ -1,7 +1,8 @@
 # To install source this file from your .zshrc file
 
 # Change this to reflect your installation directory
-export __GIT_PROMPT_DIR=~/.dotfiles
+export __GIT_PROMPT_DIR=~/prj/dotfiles
+#export __GIT_PROMPT_DIR=~/.dotfiles
 # Initialize colors.
 autoload -U colors
 colors
@@ -92,4 +93,4 @@ ZSH_THEME_GIT_PROMPT_REMOTE=""
 ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"
 
-export PS1='$(git_prompt_info)${VIMODE}[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+export PS1='[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}]$(git_super_status) '
