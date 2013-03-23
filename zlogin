@@ -1,11 +1,20 @@
 # Run for every login shell after sourcing zshrc if also an interactive shell
 # adds the current branch name in green
-git_prompt_info() {
+function git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
   if [[ -n $ref ]]; then
     echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
   fi
 }
+
+# set VIMODE according to the current mode (default â[i]â)
+VIMODE='[i]'
+function zle-keymap-select {
+ VIMODE="${${KEYMAP/vicmd/[n]}/(main|viins)/[i]}"
+ zle reset-prompt
+}
+
+zle -N zle-keymap-select
 
 # makes color constants available
 autoload -U colors
@@ -18,7 +27,4 @@ export CLICOLOR=1
 setopt prompt_subst
 
 # prompt
-export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
-
-# load thoughtbot/dotfiles scripts
-export PATH="$HOME/.bin:$PATH"
+export PS1='$(git_prompt_info)${VIMODE}[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
