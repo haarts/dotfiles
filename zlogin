@@ -1,30 +1,95 @@
-# Run for every login shell after sourcing zshrc if also an interactive shell
-# adds the current branch name in green
-function git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ -n $ref ]]; then
-    echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
-  fi
-}
+# To install source this file from your .zshrc file
 
-# set VIMODE according to the current mode (default â[i]â)
-VIMODE='[i]'
-function zle-keymap-select {
- VIMODE="${${KEYMAP/vicmd/[n]}/(main|viins)/[i]}"
- zle reset-prompt
-}
-
-zle -N zle-keymap-select
-
-# makes color constants available
+# Change this to reflect your installation directory
+export __GIT_PROMPT_DIR=~/.dotfiles
+# Initialize colors.
 autoload -U colors
 colors
 
-# enable colored output from ls, etc
-export CLICOLOR=1
-
-# expand functions in the prompt
+# Allow for functions in the prompt.
 setopt prompt_subst
 
-# prompt
+autoload -U add-zsh-hook
+
+add-zsh-hook chpwd chpwd_update_git_vars
+add-zsh-hook preexec preexec_update_git_vars
+add-zsh-hook precmd precmd_update_git_vars
+
+## Function definitions
+function preexec_update_git_vars() {
+    case "$2" in
+        git*)
+        __EXECUTED_GIT_COMMAND=1
+        ;;
+    esac
+}
+
+function precmd_update_git_vars() {
+    if [ -n "$__EXECUTED_GIT_COMMAND" ] || [ -n "$ZSH_THEME_GIT_PROMPT_NOCACHE" ]; then
+        update_current_git_vars
+        unset __EXECUTED_GIT_COMMAND
+    fi
+}
+
+function chpwd_update_git_vars() {
+    update_current_git_vars
+}
+
+function update_current_git_vars() {
+    unset __CURRENT_GIT_STATUS
+
+    local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
+    _GIT_STATUS=`python ${gitstatus}`
+    __CURRENT_GIT_STATUS=("${(@f)_GIT_STATUS}")
+	GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
+	GIT_REMOTE=$__CURRENT_GIT_STATUS[2]
+	GIT_STAGED=$__CURRENT_GIT_STATUS[3]
+	GIT_CONFLICTS=$__CURRENT_GIT_STATUS[4]
+	GIT_CHANGED=$__CURRENT_GIT_STATUS[5]
+	GIT_UNTRACKED=$__CURRENT_GIT_STATUS[6]
+	GIT_CLEAN=$__CURRENT_GIT_STATUS[7]
+}
+
+
+git_super_status() {
+	precmd_update_git_vars
+    if [ -n "$__CURRENT_GIT_STATUS" ]; then
+	  STATUS="($GIT_BRANCH"
+	  STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
+	  if [ -n "$GIT_REMOTE" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_REMOTE$GIT_REMOTE%{${reset_color}%}"
+	  fi
+	  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_SEPARATOR"
+	  if [ "$GIT_STAGED" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+	  fi
+	  if [ "$GIT_CONFLICTS" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+	  fi
+	  if [ "$GIT_CHANGED" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+	  fi
+	  if [ "$GIT_UNTRACKED" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
+	  fi
+	  if [ "$GIT_CLEAN" -eq "1" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+	  fi
+	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+	  echo "$STATUS"
+	fi
+}
+
+# Default values for the appearance of the prompt. Configure at will.
+ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}●"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}✖"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}✚"
+ZSH_THEME_GIT_PROMPT_REMOTE=""
+ZSH_THEME_GIT_PROMPT_UNTRACKED="…"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✔"
+
 export PS1='$(git_prompt_info)${VIMODE}[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
