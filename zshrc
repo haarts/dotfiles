@@ -4,13 +4,21 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export GOPATH=~/prj/go
 export HISTSIZE=10000
+export SAVEHIST=10000
+
+export VISUAL=/usr/bin/vim
+export EDITOR=$VISUAL
 
 bindkey -e
 
 setopt inc_append_history
 setopt share_history
 setopt histignoredups
-setopt extended_glob
+setopt append_history
+setopt hist_reduce_blanks
+setopt hist_ignore_space
+setopt hist_no_store
+setopt extended_history
 
 autoload -U compinit
 compinit
