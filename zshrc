@@ -3,6 +3,7 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export GOPATH=~/prj/go
+export HISTFILE=~/.history
 export HISTSIZE=10000
 export SAVEHIST=10000
 
