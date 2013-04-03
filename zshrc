@@ -26,6 +26,9 @@ compinit
 
 setopt prompt_subst
 
+autoload -U select-word-style
+select-word-style bash
+
 alias pingg="ping -i 3 google.com"
 alias l='ls -lh'
 alias ll='ls -la'
