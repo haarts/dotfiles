@@ -34,7 +34,7 @@ alias l='ls -lh'
 alias ll='ls -la'
 alias be='bundle exec'
 alias ack='ack-grep -a'
-alias fish='git commit -m ":fish:"'
+#alias fish='git commit -m ":fish:"'
 
 zstyle ':completion::complete:git-*::files' ignored-patterns '*?~'
 zstyle ':completion::complete:hub::*' ignored-patterns '*?~'
