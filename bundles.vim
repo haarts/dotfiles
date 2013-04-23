@@ -15,7 +15,6 @@ Bundle 'vim-scripts/bufkill.vim'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'jnwhiteh/vim-golang'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-cucumbert'
 
