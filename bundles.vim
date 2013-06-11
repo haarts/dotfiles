@@ -16,7 +16,7 @@ Bundle 'tsaleh/vim-matchit'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-cucumbert'
+Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-surround'
 
 filetype plugin indent on
