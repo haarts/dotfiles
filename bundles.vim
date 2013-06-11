@@ -18,6 +18,7 @@ Bundle 'jnwhiteh/vim-golang'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-surround'
+Bundle 'dag/vim-fish'
 
 filetype plugin indent on
 " end Vundle

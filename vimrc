@@ -1,5 +1,7 @@
 set encoding=utf-8
 
+set shell=/bin/bash
+
 source ~/.vim/bundles.vim
 
 let mapleader = ","
@@ -69,6 +71,7 @@ set laststatus=2
 set hidden
 set tags=./tags;$HOME
 
+autocmd FileType fish setlocal nofoldenable
 autocmd FileType java,ruby,eruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
