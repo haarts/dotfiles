@@ -16,10 +16,11 @@ Bundle 'tsaleh/vim-matchit'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-surround'
 Bundle 'dag/vim-fish'
 Bundle 'Yggdroot/indentLine'
+Bundle 'mileszs/ack.vim'
+Bundle 'Lokaltog/vim-easymotion'
 
 filetype plugin indent on
 " end Vundle
