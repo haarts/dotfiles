@@ -76,9 +76,10 @@ set tags=./tags;$HOME
 
 autocmd FileType fish setlocal nofoldenable
 autocmd FileType java,ruby,eruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-"autocmd FileType go autocmd BufWritePre <buffer> Fmt
-au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+"au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
 au BufRead,BufNewFile *.go set filetype=go
+autocmd FileType go setlocal noexpandtab tabstop=4 listchars=tab:\ \ ,trail:·
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 au FocusLost * :wa
