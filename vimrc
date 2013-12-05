@@ -3,6 +3,7 @@ set encoding=utf-8
 set shell=/bin/bash
 
 source ~/.vim/bundles.vim
+source ~/.vim/autotag.vim
 
 let mapleader = ","
 
@@ -17,6 +18,8 @@ let g:Powerline_symbols = 'unicode'
 
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
+
+:hi Visual term=reverse cterm=reverse guibg=LightGrey
 
 set ruler
 set nocompatible
