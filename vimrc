@@ -1,11 +1,20 @@
+" Vim needs a POSIX-Compliant shell. Fish is not.
+" if $SHELL =~ 'bin/fish'
+  set shell=/bin/sh
+" endif
+filetype on
+filetype off
+
 set encoding=utf-8
 
 set shell=/bin/bash
 
 source ~/.vim/bundles.vim
-source ~/.vim/autotag.vim
+"source ~/.vim/autotag.vim
 
 let mapleader = ","
+let g:CommandTMaxHeight=25
+let g:CommandTMatchWindowReverse=1
 
 syntax enable
 set background=dark
@@ -14,7 +23,8 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
   set fileencodings=utf-8,latin1
 endif
 
-let g:Powerline_symbols = 'unicode'
+"let g:Powerline_symbols = 'unicode'
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
@@ -52,16 +62,21 @@ set scrolloff=3
 set tabpagemax=150
 " set number
 
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+vmap <leader>W :s/\s\+$//<CR>:let @/=''<CR>
 map <leader>j :%!python -m json.tool<CR>
 nmap <C-h> :bnext<CR>
 nmap <C-l> :bprev<CR>
+nmap <leader>nrn :set norelativenumber<CR>
+nmap <leader>rn :set relativenumber<CR>
+" screw Ex mode, whatever that is
+nnoremap Q <nop>
 
 " Sane Yank
 nmap Y y$
 
-command W w
-command Q q
+" command W w
+" command Q q
 
 filetype plugin indent on
 
@@ -77,9 +92,9 @@ set tags=./tags;$HOME
 autocmd FileType fish setlocal nofoldenable
 autocmd FileType java,ruby,eruby autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 "au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
-au BufRead,BufNewFile *.go set filetype=go
-autocmd FileType go setlocal noexpandtab tabstop=4 listchars=tab:\ \ ,trail:·
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
+"au BufRead,BufNewFile *.go set filetype=go
+"autocmd FileType go setlocal noexpandtab tabstop=4 listchars=tab:\ \ ,trail:·
+"autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
 au FocusLost * :wa
@@ -94,46 +109,17 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+autocmd BufRead,BufNewFile *.go call Go_set_env()
+function! Go_set_env()
+  set listchars=tab:\ \ ,trail:·
+  set filetype=go
+  set noexpandtab
+  set tabstop=4
+  set shiftwidth=4
+  au Filetype go nnoremap <leader>d :exe "GoDef" <CR>
+endfunction
+
 autocmd BufWritePost *
       \ if filereadable('tags') |
       \   call system('ctags -a '.expand('%')) |
       \ endif
-
-" rspec mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-
-function! RunCurrentSpecFile()
-  if InSpecFile()
-    let l:command = "rspec " . @%
-    call SetLastSpecCommand(l:command)
-    call RunSpecs(l:command)
-  endif
-endfunction
-
-function! RunNearestSpec()
-  if InSpecFile()
-    let l:command = "rspec -l " . line(".") . " " . @%
-    call SetLastSpecCommand(l:command)
-    call RunSpecs(l:command)
-  endif
-endfunction
-
-function! RunLastSpec()
-  if exists("t:last_spec_command")
-    call RunSpecs(t:last_spec_command)
-  endif
-endfunction
-
-function! InSpecFile()
-  return match(expand("%"), "_spec.rb$") != -1
-endfunction
-
-function! SetLastSpecCommand(command)
-  let t:last_spec_command = a:command
-endfunction
-
-function! RunSpecs(command)
-  execute ":w\|!clear && echo " . a:command . " && echo && " . a:command
-endfunction
