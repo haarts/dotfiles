@@ -24,7 +24,9 @@ if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
 endif
 
 "let g:Powerline_symbols = 'unicode'
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set t_Co=256
+set noshowmode
 
 set exrc   " enable per-directory .vimrc files
 set secure " disable unsafe commands in local .vimrc files
@@ -109,6 +111,15 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+au Filetype go nmap <leader>d <Plug>(go-def)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gd <Plug>(go-doc-browser)
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <F8> :TagbarToggle<CR>
+
+let @b = '^f{af}ikA,V:s/, /,\r/jf}=%'
+let @t = 'ipackage mainimport ("fmt")main	fmt.P€kb€kb€kb€kbn	main'
+
 autocmd BufRead,BufNewFile *.go call Go_set_env()
 function! Go_set_env()
   set listchars=tab:\ \ ,trail:Â·
@@ -116,7 +127,6 @@ function! Go_set_env()
   set noexpandtab
   set tabstop=4
   set shiftwidth=4
-  au Filetype go nnoremap <leader>d :exe "GoDef" <CR>
 endfunction
 
 autocmd BufWritePost *
