@@ -12,9 +12,7 @@ Bundle 'gmarik/vundle'
 Bundle 'wincent/Command-T'
 Bundle 'tpope/vim-rails'
 Bundle 'vim-scripts/bufkill.vim'
-Bundle 'tsaleh/vim-matchit'
-Bundle 'Lokaltog/powerline'
-"Bundle 'jnwhiteh/vim-golang'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'} 
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-surround'
 Bundle 'dag/vim-fish'
@@ -24,6 +22,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'tpope/vim-fugitive'
 Bundle 'fatih/vim-go'
 Bundle 'SirVer/ultisnips'
+Bundle 'majutsushi/tagbar'
 
 filetype plugin indent on
 " end Vundle
