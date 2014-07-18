@@ -45,3 +45,5 @@
 	trustExitCode = true
 [pull]
 	rebase = true
+[grep]
+	lineNumber = true
