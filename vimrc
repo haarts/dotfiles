@@ -15,6 +15,8 @@ source ~/.vim/bundles.vim
 let mapleader = ","
 let g:CommandTMaxHeight=25
 let g:CommandTMatchWindowReverse=1
+let g:tagbar_width = 60
+"let g:go_fmt_command = "gofmt"
 
 syntax enable
 set background=dark
@@ -112,8 +114,8 @@ inoremap <right> <nop>
 
 au Filetype go nmap <leader>d <Plug>(go-def)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>gd <Plug>(go-doc-browser)
-au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>gd :GoDocBrowser<CR>
+au FileType go nmap <Leader>r :w<CR><Plug>(go-run)
 au FileType go nmap <F8> :TagbarToggle<CR>
 
 autocmd BufRead,BufNewFile *.go call Go_set_env()
