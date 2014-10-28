@@ -1,13 +1,7 @@
-" Vim needs a POSIX-Compliant shell. Fish is not.
-" if $SHELL =~ 'bin/fish'
-  set shell=/bin/sh
-" endif
 filetype on
 filetype off
 
 set encoding=utf-8
-
-set shell=/bin/bash
 
 source ~/.vim/bundles.vim
 "source ~/.vim/autotag.vim
