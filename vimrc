@@ -120,6 +120,7 @@ autocmd BufRead,BufNewFile *.go call Go_set_env()
 function! Go_set_env()
   set listchars=tab:\ \ ,trail:·
   set filetype=go
+  let g:go_fmt_command = "goimports"
   set noexpandtab
   set tabstop=4
   set shiftwidth=4
