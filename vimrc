@@ -44,6 +44,7 @@ set wildmenu
 set wildmode=longest,list,full
 set relativenumber
 set undofile
+set directory-=.
 
 " sane regex
 set gdefault
