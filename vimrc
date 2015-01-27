@@ -95,6 +95,8 @@ autocmd FileType java,ruby,eruby autocmd BufWritePre <buffer> :call setline(1,ma
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 autocmd! BufNewFile,BufRead *.ino setlocal ft=arduino
+autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
+autocmd! BufNewFile,BufRead *.md setlocal textwidth=79
 au FocusLost * :wa
 au! BufWritePost .vimrc source ~/.vimrc
 
