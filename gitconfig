@@ -47,3 +47,5 @@
 	rebase = true
 [grep]
 	lineNumber = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
