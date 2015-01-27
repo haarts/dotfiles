@@ -99,6 +99,7 @@ autocmd! BufNewFile,BufRead *.md setlocal ft=markdown
 autocmd! BufNewFile,BufRead *.md setlocal textwidth=79
 au FocusLost * :wa
 au! BufWritePost .vimrc source ~/.vimrc
+au FileType html,xml runtime! macros/matchit.vim
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
