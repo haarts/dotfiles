@@ -1,6 +1,6 @@
 set nocompatible
 " Vim needs a POSIX-Compliant shell. Fish is not.
-set shell=/bin/bash
+set shell=/usr/bin/bash
 
 " begin Vundle
 filetype off
@@ -26,5 +26,6 @@ Bundle 'fatih/vim-go'
 Bundle 'SirVer/ultisnips'
 Bundle 'majutsushi/tagbar'
 
+call vundle#end()
 filetype plugin indent on
 " end Vundle
