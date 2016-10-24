@@ -110,11 +110,11 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-au Filetype go nmap <leader>d <Plug>(go-def)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-au FileType go nmap <Leader>gd :GoDocBrowser<CR>
-au FileType go nmap <Leader>r :w<CR><Plug>(go-run)
-au FileType go nmap <F8> :TagbarToggle<CR>
+autocmd Filetype go nmap <leader>d <Plug>(go-def)
+autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+autocmd FileType go nmap <Leader>gd :GoDocBrowser<CR>
+autocmd FileType go nmap <Leader>r :w<CR><Plug>(go-run)
+autocmd FileType go nmap <F8> :TagbarToggle<CR>
 
 autocmd BufRead,BufNewFile *.go call Go_set_env()
 function! Go_set_env()
