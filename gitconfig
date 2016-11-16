@@ -33,7 +33,6 @@
 [difftool]
 	prompt = false
 [core]
-	excludesfile = ~/.gitignore
 	editor = vim
 [diff]
 	tool = diffmerge
