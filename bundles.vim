@@ -1,6 +1,6 @@
 set nocompatible
 " Vim needs a POSIX-Compliant shell. Fish is not.
-set shell=/usr/bin/bash
+set shell=/bin/bash
 
 " begin Vundle
 filetype off
