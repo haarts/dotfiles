@@ -1,9 +1,11 @@
 [user]
 	name = Harm Aarts
-	email = harmaarts@gmail.com
+	email = harm@aarts.email
+	signingkey = D5AAFFE253BA8BBB7392D0F6E654691AEE2E8E4F
 [alias]
 	i = status
 	d = diff
+	ds = diff --staged
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	count = shortlog -s -n
@@ -33,7 +35,9 @@
 [difftool]
 	prompt = false
 [core]
-	editor = vim
+	editor = kak
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	autocrlf = input
 [diff]
 	tool = diffmerge
 [difftool "diffmerge"]
@@ -49,3 +53,7 @@
 	lineNumber = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[protocol]
+	version = 2
+[commit]
+	gpgsign = true
