@@ -7,6 +7,13 @@ plug "andreyorst/fzf.kak" config %{
 }
 
 hook global BufCreate .* %{editorconfig-load}
+eval %sh{kak-lsp --kakoune -s $kak_session}
+nop %sh{ (kak-lsp -s $kak_session -vvv ) > /tmp/kak-lsp.log 2>&1 < /dev/null & }
+hook global WinSetOption filetype=(rust|python|go|javascript|dart) %{
+        lsp-enable-window
+        set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
+}
+
 colorscheme default
 add-highlighter global/ number-lines -relative
 add-highlighter global/ show-matching
