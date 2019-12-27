@@ -19,19 +19,15 @@ add-highlighter global/ number-lines -relative
 add-highlighter global/ show-matching
 
 
+
 map global normal '#' :comment-line<ret> -docstring 'comment line'
 
-map global user y '<a-|>xsel -i -b<ret>'
+map global user y '<a-|>xsel -i -b<ret>' -docstring 'Copy selection to system clipboard'
 
-#eval %sh{kak-lsp --kakoune -s $kak_session}
+map global user l ': enter-user-mode lsp<ret>' -docstring 'Enter LSP user mode'
 
-#hook global BufCreate .* %{
-#    editorconfig-load
-#}
-
-#hook global WinSetOption filetype=(?!md).* %{
-#  set buffer autowrap_column 79
-#}
+# map global user \ ': tmux-terminal-horizontal kak -c %val{session}<ret>' -docstring 'Split horizontal'
+# map global user = ': tmux-terminal-vertical kak -c %val{session}<ret>' -docstring 'Split vertical'
 
 hook global WinSetOption filetype=python %{
     hook window InsertChar \t -group python-indent %{ exec -draft h@ }
@@ -40,5 +36,3 @@ hook global WinSetOption filetype=python %{
 hook global WinSetOption filetype=git-commit %{
   autowrap-enable
 }
-
-source ~/prj/smarttab.kak/rc/smarttab.kak
