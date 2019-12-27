@@ -1,11 +1,16 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
+plug "andreyorst/fzf.kak" config %{
+        map global normal <c-p> ': fzf-mode<ret>'
+} defer "fzf" %{
+        set-option global fzf_file_command "rg --files --hidden -g'!.git'"
+        set-option global fzf_highlight_command 'bat'
+}
+
 hook global BufCreate .* %{editorconfig-load}
-plug "andreyorst/fzf.kak"
 colorscheme default
 add-highlighter global/ number-lines -relative
 add-highlighter global/ show-matching
 
-map global normal <c-p> ': fzf-mode<ret>'
 
 map global normal '#' :comment-line<ret> -docstring 'comment line'
 
