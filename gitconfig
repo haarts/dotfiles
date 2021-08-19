@@ -9,7 +9,7 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	count = shortlog -s -n
-	co = checkout
+	sw = switch
 [color]
 	branch = auto
 	diff = auto
@@ -57,3 +57,6 @@
 	version = 2
 [commit]
 	gpgsign = true
+[branch]
+	sort = -authordate
+	autosetuprebase = always
